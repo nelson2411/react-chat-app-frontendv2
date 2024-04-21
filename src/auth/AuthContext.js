@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
         name: user.name,
         email: user.email,
       })
+      console.info("User logged in")
     }
     return resp.ok
   }
