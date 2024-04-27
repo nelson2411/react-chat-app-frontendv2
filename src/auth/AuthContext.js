@@ -30,7 +30,29 @@ export const AuthProvider = ({ children }) => {
     }
     return resp.ok
   }
-  const register = (name, email, password) => {}
+  const register = async (name, email, password) => {
+    const resp = await fetchWhitoutToken(
+      "login/new",
+      { name, email, password },
+      "POST"
+    )
+
+    if (resp.ok) {
+      console.log(resp)
+      localStorage.setItem("token", resp.token)
+      const { user } = resp
+      setAuth({
+        uid: user.id,
+        checking: false,
+        logged: true,
+        name: user.name,
+        email: user.email,
+      })
+      console.log("User registered")
+      return true
+    }
+    return resp.ok
+  }
   const verifyToken = React.useCallback(() => {}, [])
   const logout = () => {}
   return (
