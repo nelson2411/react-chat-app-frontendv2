@@ -1,6 +1,6 @@
 import React from "react"
 import { createContext } from "react"
-import { fetchWhitoutToken } from "../helpers/fetch"
+import { fetchWhitoutToken, fetchWithToken } from "../helpers/fetch"
 
 export const AuthContext = createContext()
 
@@ -53,8 +53,49 @@ export const AuthProvider = ({ children }) => {
     }
     return resp.ok
   }
-  const verifyToken = React.useCallback(() => {}, [])
-  const logout = () => {}
+  const verifyToken = React.useCallback(async () => {
+    const token = localStorage.getItem("token") || ""
+    if (!token) {
+      setAuth({
+        uid: null,
+        checking: false,
+        logged: false,
+        name: null,
+        email: null,
+      })
+      return false
+    }
+    const resp = await fetchWithToken("login/renew")
+    if (resp.ok) {
+      localStorage.setItem("token", resp.token)
+      const { user } = resp
+      setAuth({
+        uid: user.id,
+        checking: false,
+        logged: true,
+        name: user.name,
+        email: user.email,
+      })
+      console.info("User logged in")
+      return true
+    } else {
+      setAuth({
+        uid: null,
+        checking: false,
+        logged: false,
+        name: null,
+        email: null,
+      })
+      return false
+    }
+  }, [])
+  const logout = () => {
+    localStorage.removeItem("token") // remove the token from the local storage
+    setAuth({
+      checking: false,
+      logged: false,
+    })
+  }
   return (
     <AuthContext.Provider
       value={{
