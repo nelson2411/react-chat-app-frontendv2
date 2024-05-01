@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
       checking: false,
       logged: false,
     })
+    console.info("User logged out")
   }
   return (
     <AuthContext.Provider
