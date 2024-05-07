@@ -33,7 +33,7 @@ const SearchBox = () => {
   return (
     <div className="headind_srch">
       <div className="recent_heading mt-2">
-        <h5>{auth.name ? auth.name : "Sin nombre"}</h5>
+        <h5>{auth.name ? auth.name : "Sin nombre"} 🟢</h5>
       </div>
       <div className="srch_bar">
         <div className="stylish-input-group">
