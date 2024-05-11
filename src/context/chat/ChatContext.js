@@ -5,7 +5,7 @@ export const ChatContext = React.createContext()
 
 const initialState = {
   uid: null,
-  activeChat: null,
+  activeChat: null, // This is the user that the user is talking to
   users: [], // all users from database
   messages: [], // selected chat
 }

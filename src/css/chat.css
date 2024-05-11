@@ -119,6 +119,14 @@ img {
   width: 6%;
 }
 
+.outgoing_msg_img {
+  /* align to right */
+  display: inline-block;
+  width: 6%;
+  float: inline-end;
+  margin-left: 16px;
+}
+
 .received_msg {
   display: inline-block;
   padding: 0 0 0 10px;
@@ -167,6 +175,8 @@ img {
 .outgoing_msg {
   overflow: hidden;
   margin: 26px 0 26px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .sent_msg {

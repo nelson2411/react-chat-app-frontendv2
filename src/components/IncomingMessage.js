@@ -1,6 +1,9 @@
 import React from "react"
+import { ChatContext } from "../context/chat/ChatContext"
+import { AuthContext } from "../auth/AuthContext"
+import { hourMonth } from "../helpers/hourMonth"
 
-const IncomingMessage = () => {
+const IncomingMessage = ({ msg }) => {
   return (
     <div className="incoming_msg">
       <div className="incoming_msg_img">
@@ -11,8 +14,8 @@ const IncomingMessage = () => {
       </div>
       <div className="received_msg">
         <div className="received_withd_msg">
-          <p>Test which is a new approach to have all solutions</p>
-          <span className="time_date"> 11:01 AM | June 9</span>
+          <p>{msg.message}</p>
+          <span className="time_date"> {hourMonth(msg.createdAt)}</span>
         </div>
       </div>
     </div>

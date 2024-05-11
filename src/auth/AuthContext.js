@@ -1,6 +1,8 @@
 import React from "react"
 import { createContext } from "react"
 import { fetchWhitoutToken, fetchWithToken } from "../helpers/fetch"
+import { ChatContext } from "../context/chat/ChatContext"
+import { types } from "../types/types"
 
 export const AuthContext = createContext()
 
@@ -14,6 +16,7 @@ const initialState = {
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = React.useState(initialState)
+  const { dispatch } = React.useContext(ChatContext)
   const login = async (email, password) => {
     const resp = await fetchWhitoutToken("login", { email, password }, "POST")
     if (resp.ok) {
@@ -91,6 +94,10 @@ export const AuthProvider = ({ children }) => {
   }, [])
   const logout = () => {
     localStorage.removeItem("token") // remove the token from the local storage
+    // clean the chat state
+    dispatch({
+      type: types.clearChatState,
+    })
     setAuth({
       checking: false,
       logged: false,
