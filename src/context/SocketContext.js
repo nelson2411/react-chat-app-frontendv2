@@ -3,17 +3,14 @@ import { types } from "../types/types"
 import { useSocket } from "../hooks/useSocket"
 import { AuthContext } from "../auth/AuthContext"
 import { ChatContext } from "./chat/ChatContext"
-import {
-  scrollToBottom,
-  scrollToBottomAnimated,
-} from "../helpers/scrollToBottom"
+import { scrollToBottomAnimated } from "../helpers/scrollToBottom"
 
 export const SocketContext = React.createContext()
+const socketuRL = process.env.REACT_APP_API_URL
 
 export const SocketProvider = ({ children }) => {
-  const { socket, online, connectSocket, disconnectSocket } = useSocket(
-    "http://localhost:8080"
-  )
+  const { socket, online, connectSocket, disconnectSocket } =
+    useSocket(socketuRL)
   const { auth } = React.useContext(AuthContext)
   const { dispatch } = React.useContext(ChatContext)
 
