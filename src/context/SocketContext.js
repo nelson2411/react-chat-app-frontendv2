@@ -6,7 +6,8 @@ import { ChatContext } from "./chat/ChatContext"
 import { scrollToBottomAnimated } from "../helpers/scrollToBottom"
 
 export const SocketContext = React.createContext()
-const socketuRL = process.env.REACT_APP_API_URL
+const socketuRL =
+  "https://chat-backend-socket-react-9f7f791f4bad.herokuapp.com/"
 
 export const SocketProvider = ({ children }) => {
   const { socket, online, connectSocket, disconnectSocket } =
